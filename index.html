@@ -18,23 +18,23 @@
       background: linear-gradient(to bottom, #ffe6f0, #ffccdd);
       color: #d63384;
       text-align: center;
-      overflow: hidden;
+      /* overflow: hidden; --> dihapus supaya scroll jalan */
     }
 
     .screen {
-      position: absolute;
       width: 100%;
-      height: 100%;
+      min-height: 100vh;
+      padding: 60px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: flex-start;
+      overflow-y: auto;
       transition: opacity 1s ease;
     }
 
     .hidden {
-      opacity: 0;
-      pointer-events: none;
+      display: none;
     }
 
     h1 {
@@ -62,11 +62,12 @@
     .message {
       font-size: 1.2em;
       max-width: 600px;
-      margin: 20px auto;
+      margin: 20px auto 60px auto;
       padding: 20px;
       background: #fff0f5;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(255, 192, 203, 0.3);
+      line-height: 1.8;
     }
 
     .heart {
@@ -77,6 +78,7 @@
       transform: rotate(45deg);
       animation: float 8s infinite ease-in;
       top: -30px;
+      z-index: 0;
     }
 
     .heart::before,
@@ -116,44 +118,36 @@
   <!-- Layar Pertama -->
   <div class="screen" id="landing">
     <h1>Happy Birthday Sayang 💗</h1>
-    <button class="btn" onclick="start()">Masuk</button>
+    <button class="btn" id="masukBtn" onclick="start()">Masuk</button>
   </div>
 
   <!-- Layar Kedua -->
   <div class="screen hidden" id="main">
     <h1>Selamat Ulang Tahun, Sayangku 💕</h1>
     <div class="message">
-      halo sayang, selamat ulang tahun ya lee sayang, hari ini hari kamu lahir, hari ini hari dimana nyawa dua orang perempuan cantik di pertaruhkan, makasih buat mama udah lahirin cewe kaya kamu, makasih udah lahir karna kamu bahagiain hidup aku, kalo kamu ga lahir aku gimana coba? hidupku pasti bakalan suram banget gaada kamu, aku bersyukur banget kamu di lahirin di dunia ini sayang, Sayangku, di hari yang istimewa ini, aku ingin kamu tahu betapa bersyukurnya aku karena semesta mempertemukan kita. Setiap detik bersamamu adalah anugerah yang tak ternilai. Kamu bukan hanya seseorang yang aku cintai, tapi juga sahabat terbaik, dan alasan kenapa aku tersenyum setiap hari
-      Hari ini, saat lilin-lilin kecil menyala untuk merayakan hari lahirmu, hatiku penuh dengan doa dan harapan yang tulus. Semoga semua mimpi dan keinginanmu satu per satu tercapai. dan yang paling penting, semoga kita terus bersama, semoga umur kamu panjang, tetaplah hidup untukku, aku ga bisa kalo ga ada kamu, beneran ga bisa kalo gaada kamu.
+      halo sayang, selamat ulang tahun ya lee sayang, hari ini hari kamu lahir, hari ini hari dimana nyawa dua orang perempuan cantik di pertaruhkan, makasih buat mama udah lahirin cewe kaya kamu, makasih udah lahir karna kamu bahagiain hidup aku, kalo kamu ga lahir aku gimana coba? hidupku pasti bakalan suram banget gaada kamu, aku bersyukur banget kamu di lahirin di dunia ini sayang, Sayangku, di hari yang istimewa ini, aku ingin kamu tahu betapa bersyukurnya aku karena semesta mempertemukan kita. Setiap detik bersamamu adalah anugerah yang tak ternilai. Kamu bukan hanya seseorang yang aku cintai, tapi juga sahabat terbaik, dan alasan kenapa aku tersenyum setiap hari.
+      <br><br>
+      Hari ini, saat lilin-lilin kecil menyala untuk merayakan hari lahirmu, hatiku penuh dengan doa dan harapan yang tulus. Semoga semua mimpi dan keinginanmu satu per satu tercapai. Dan yang paling penting, semoga kita terus bersama, semoga umur kamu panjang, tetaplah hidup untukku, aku ga bisa kalo ga ada kamu, beneran ga bisa kalo gaada kamu.
+      <br><br>
       Aku ingin kamu tahu bahwa dalam segala hal, aku akan selalu di samping kamu. Dalam tawa, dalam tangis, dalam segala naik turun hidup ini. Kamu adalah rumah terindah tempat hatiku beristirahat sayang.
+      <br><br>
       Selamat ulang tahun, cintaku. Terima kasih karena telah lahir, dan terima kasih karena telah memilihku untuk ada dalam hidupmu. Aku mencintaimu, lebih dari kata-kata yang mampu menjelaskan. 💖
     </div>
-
   </div>
 
+  <!-- Audio -->
+  <audio id="bgm" loop>
+    <source src="hbd.mp3" type="audio/mp3">
+  </audio>
 
-<!-- Audio -->
-<audio id="bgm" loop>
-  <source src="hbd.mp3" type="audio/mp3">
-</audio>
-
-<!-- Script -->
-<script>
-  document.getElementById("masukBtn").addEventListener("click", function () {
-    const bgm = document.getElementById("bgm");
-    bgm.play();
-  });
-</script>
-
+  <!-- Script -->
   <script>
     function start() {
       document.getElementById('landing').classList.add('hidden');
       document.getElementById('main').classList.remove('hidden');
 
-      // Autoplay music
       const audio = document.getElementById('bgm');
       audio.play().catch(() => {
-        // some browsers need user interaction
         console.log('Autoplay dibatasi, user harus klik');
       });
     }
