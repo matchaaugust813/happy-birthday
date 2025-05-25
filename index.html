@@ -12,17 +12,16 @@
       box-sizing: border-box;
     }
 
-    body, html {
-      height: 100%;
+    html, body {
       font-family: 'Open Sans', sans-serif;
       background: linear-gradient(to bottom, #ffe6f0, #ffccdd);
       color: #d63384;
       text-align: center;
-      /* overflow: hidden; --> dihapus supaya scroll jalan */
+      height: 100%;
     }
 
     .screen {
-      width: 100%;
+      display: none;
       min-height: 100vh;
       padding: 60px 20px;
       display: flex;
@@ -30,16 +29,15 @@
       align-items: center;
       justify-content: flex-start;
       overflow-y: auto;
-      transition: opacity 1s ease;
     }
 
-    .hidden {
-      display: none;
+    .screen.active {
+      display: flex;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
-      font-size: 2.8em;
+      font-size: 2.5em;
       margin-bottom: 20px;
     }
 
@@ -60,14 +58,14 @@
     }
 
     .message {
-      font-size: 1.2em;
+      font-size: 1.1em;
       max-width: 600px;
-      margin: 20px auto 60px auto;
+      margin: 20px auto;
       padding: 20px;
       background: #fff0f5;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(255, 192, 203, 0.3);
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
     .heart {
@@ -116,16 +114,18 @@
 <body>
 
   <!-- Layar Pertama -->
-  <div class="screen" id="landing">
+  <div class="screen active" id="landing">
     <h1>Happy Birthday Sayang 💗</h1>
-    <button class="btn" id="masukBtn" onclick="start()">Masuk</button>
+    <button class="btn" onclick="start()">Masuk</button>
   </div>
 
   <!-- Layar Kedua -->
-  <div class="screen hidden" id="main">
+  <div class="screen" id="main">
     <h1>Selamat Ulang Tahun, Sayangku 💕</h1>
     <div class="message">
-      halo sayang, selamat ulang tahun ya lee sayang, hari ini hari kamu lahir, hari ini hari dimana nyawa dua orang perempuan cantik di pertaruhkan, makasih buat mama udah lahirin cewe kaya kamu, makasih udah lahir karna kamu bahagiain hidup aku, kalo kamu ga lahir aku gimana coba? hidupku pasti bakalan suram banget gaada kamu, aku bersyukur banget kamu di lahirin di dunia ini sayang, Sayangku, di hari yang istimewa ini, aku ingin kamu tahu betapa bersyukurnya aku karena semesta mempertemukan kita. Setiap detik bersamamu adalah anugerah yang tak ternilai. Kamu bukan hanya seseorang yang aku cintai, tapi juga sahabat terbaik, dan alasan kenapa aku tersenyum setiap hari.
+      halo sayang, selamat ulang tahun ya lee sayang, hari ini hari kamu lahir, hari ini hari dimana nyawa dua orang perempuan cantik di pertaruhkan, makasih buat mama udah lahirin cewe kaya kamu, makasih udah lahir karna kamu bahagiain hidup aku, kalo kamu ga lahir aku gimana coba? hidupku pasti bakalan suram banget gaada kamu, aku bersyukur banget kamu di lahirin di dunia ini sayang.
+      <br><br>
+      Sayangku, di hari yang istimewa ini, aku ingin kamu tahu betapa bersyukurnya aku karena semesta mempertemukan kita. Setiap detik bersamamu adalah anugerah yang tak ternilai. Kamu bukan hanya seseorang yang aku cintai, tapi juga sahabat terbaik, dan alasan kenapa aku tersenyum setiap hari.
       <br><br>
       Hari ini, saat lilin-lilin kecil menyala untuk merayakan hari lahirmu, hatiku penuh dengan doa dan harapan yang tulus. Semoga semua mimpi dan keinginanmu satu per satu tercapai. Dan yang paling penting, semoga kita terus bersama, semoga umur kamu panjang, tetaplah hidup untukku, aku ga bisa kalo ga ada kamu, beneran ga bisa kalo gaada kamu.
       <br><br>
@@ -143,8 +143,8 @@
   <!-- Script -->
   <script>
     function start() {
-      document.getElementById('landing').classList.add('hidden');
-      document.getElementById('main').classList.remove('hidden');
+      document.getElementById('landing').classList.remove('active');
+      document.getElementById('main').classList.add('active');
 
       const audio = document.getElementById('bgm');
       audio.play().catch(() => {
@@ -152,7 +152,7 @@
       });
     }
 
-    // Animasi hujan hati
+    // Hujan hati
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
